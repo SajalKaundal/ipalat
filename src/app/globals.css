@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+:root {
+  --red: #D50B27;
+  --gray: #808080;
+  --white:#FFFFFF;
+  --soft-red:#FF7E7E
+}
+
+@theme inline {
+  --color-primary: var(--red);
+  --color-secondary: var(--soft-red);
+  --color-text-primary:var(--gray);
+  --color-white:var(--white);
+  --font-gilroy: var(--font-gilroy);
+}
+
+@utility custom-container{
+  max-width: 1440px;
+  margin: auto;
+}
