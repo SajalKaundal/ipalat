@@ -71,7 +71,7 @@ export default function Featured() {
     if (isRightSwipe && currentIndex > 0) {
       handlePrev();
     }
-    
+
     setTouchStart(null);
     setTouchEnd(null);
   };
@@ -79,7 +79,7 @@ export default function Featured() {
   return (
     <section className="bg-primary select-none">
       <div className="custom-container flex flex-col md:flex-row  justify-center items-center overflow-hidden px-5 py-5 md:py-12.5">
-        <button 
+        <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
           className={clsx(
@@ -89,7 +89,7 @@ export default function Featured() {
           aria-label="Previous product"
         ></button>
 
-        <div 
+        <div
           className="overflow-hidden w-full"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
@@ -103,13 +103,13 @@ export default function Featured() {
             if (touchStart !== null) onTouchEnd();
           }}
         >
-          <div 
-            className="flex transition-transform duration-500 ease-in-out pointer-events-none md:pointer-events-auto"
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {featured.map((product) => (
-              <div key={product.id} className="w-full flex-shrink-0 flex flex-col-reverse md:flex-row md:items-end">
-                <div className="flex flex-col gap-2.5 md:min-w-80 md:mt-10 pointer-events-auto">
+              <div key={product.id} className="w-full shrink-0 flex flex-col-reverse md:flex-row md:items-end pb-5">
+                <div className="flex flex-col gap-2.5 md:min-w-80 md:mt-10">
                   <span className="font-gilroy text-white text-[60px] font-[950] leading-17.5 md:text-[clamp(40px,4vw,60px)] md:leading-[clamp(3rem,4vw,4.375rem)]">
                     {product.name}<sup>®</sup>
                   </span>
@@ -144,7 +144,7 @@ export default function Featured() {
           </div>
         </div>
 
-        <button 
+        <button
           onClick={handleNext}
           disabled={currentIndex === featured.length - 1}
           className={clsx(
