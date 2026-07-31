@@ -74,7 +74,7 @@ export default function RootLayout({
       lang="en"
       className={`${gilroy.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full font-gilroy">{children}</body>
     </html>
   );
 }

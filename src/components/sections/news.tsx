@@ -18,7 +18,7 @@ export default function News() {
   return (
     <section>
       <div className="relative h-21.75 w-full bg-primary flex justify-center"></div>
-      <div className="custom-container w-full grid grid-cols-1 md:grid-cols-2 justify-items-center max-w-248.75">
+      <div className="custom-container w-full flex flex-col md:flex-row items-center md:justify-around gap-12 md:gap-8 px-5">
         {news.map((news, index) => (
           <div
             key={index}
