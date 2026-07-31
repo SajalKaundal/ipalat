@@ -26,7 +26,7 @@ export default function NavBar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-20.75">
           {navLinks.map((link, index) => (
-            <Link href={link.href} key={index}>
+            <Link href={link.href} key={index} className="group relative">
               <Typography
                 variant="h5"
                 as="span"
@@ -35,6 +35,7 @@ export default function NavBar() {
               >
                 {link.label}
               </Typography>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full rounded-full"></span>
             </Link>
           ))}
         </div>
@@ -72,7 +73,7 @@ export default function NavBar() {
                 key={index}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="py-4 border-b border-white/10"
+                className="py-4 border-b border-white/10 group relative w-fit"
               >
                 <Typography
                   variant="h5"
@@ -82,6 +83,7 @@ export default function NavBar() {
                 >
                   {link.label}
                 </Typography>
+                <span className="absolute bottom-3 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full rounded-full"></span>
               </Link>
             ))}
           </div>
