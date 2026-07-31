@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="bg-primary border-b-10 border-white">
+    <section className="bg-primary border-b-5 border-white">
       <div className="custom-container relative px-5 md:px-26.5 md:py-11 flex flex-col md:flex-row justify-start overflow-clip">
         <div className="rounded-full flex flex-col items-center justify-center md:bg-white max-w-171.25 md:aspect-square md:w-[60%] md:px-7 pt-10 md:pt-0">
           <span className="font-gilroy font-extrabold text-center text-white md:text-primary text-[30px] leading-10 md:leading-[clamp(14px,1.8vw,30px)] md:text-[clamp(14px,1.8vw,30px)]">
