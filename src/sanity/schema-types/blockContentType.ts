@@ -1,5 +1,5 @@
 import {defineType, defineArrayMember} from 'sanity'
-
+import ImageIcon from '@sanity/icons/Image'
 /**
  * This is the schema type for block content used in the post document type
  * Importing this type into the studio configuration's `schema` property
@@ -14,6 +14,7 @@ import {defineType, defineArrayMember} from 'sanity'
 export const blockContentType = defineType({
   title: 'Block Content',
   name: 'blockContent',
+  icon: ImageIcon,
   type: 'array',
   of: [
     defineArrayMember({
