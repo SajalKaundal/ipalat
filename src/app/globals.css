@@ -13,6 +13,18 @@
   --color-text-primary:var(--gray);
   --color-white:var(--white);
   --font-gilroy: var(--font-gilroy);
+  --animate-slide-in: slide-in 0.4s ease-out;
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @utility custom-container{

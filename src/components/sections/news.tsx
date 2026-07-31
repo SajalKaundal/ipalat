@@ -24,12 +24,13 @@ export default function News() {
             key={index}
             className="max-w-89.5 flex flex-col gap-2.5 md:gap-7.5 -translate-y-11"
           >
-            <div className="bg-secondary rounded-full w-full">
+            <div className="bg-secondary rounded-full w-full overflow-hidden">
               <Image
                 src={news.image}
                 alt="news image"
                 width={445}
                 height={445}
+                className="animate-[spin_15s_linear_infinite]"
               />
             </div>
             <div className="font-gilroy text-primary text-[30px] md:text-[40px] leading-10 md:leading-11.25 font-extrabold">
