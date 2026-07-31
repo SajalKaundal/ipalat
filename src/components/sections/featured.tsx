@@ -38,8 +38,46 @@ export default function Featured() {
     }
   };
 
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
+    setTouchEnd(null);
+    if ("targetTouches" in e) {
+      setTouchStart(e.targetTouches[0].clientX);
+    } else {
+      setTouchStart((e as React.MouseEvent).clientX);
+    }
+  };
+
+  const onTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
+    if ("targetTouches" in e) {
+      setTouchEnd(e.targetTouches[0].clientX);
+    } else {
+      setTouchEnd((e as React.MouseEvent).clientX);
+    }
+  };
+
+  const onTouchEnd = () => {
+    if (touchStart === null || touchEnd === null) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && currentIndex < featured.length - 1) {
+      handleNext();
+    }
+    if (isRightSwipe && currentIndex > 0) {
+      handlePrev();
+    }
+    
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
   return (
-    <section className="bg-primary">
+    <section className="bg-primary select-none">
       <div className="custom-container flex flex-col md:flex-row  justify-center items-center overflow-hidden px-5 py-5 md:py-12.5">
         <button 
           onClick={handlePrev}
@@ -51,14 +89,27 @@ export default function Featured() {
           aria-label="Previous product"
         ></button>
 
-        <div className="overflow-hidden w-full">
+        <div 
+          className="overflow-hidden w-full"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onMouseDown={onTouchStart}
+          onMouseMove={(e) => {
+            if (touchStart !== null) onTouchMove(e);
+          }}
+          onMouseUp={onTouchEnd}
+          onMouseLeave={() => {
+            if (touchStart !== null) onTouchEnd();
+          }}
+        >
           <div 
-            className="flex transition-transform duration-500 ease-in-out"
+            className="flex transition-transform duration-500 ease-in-out pointer-events-none md:pointer-events-auto"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {featured.map((product) => (
               <div key={product.id} className="w-full flex-shrink-0 flex flex-col-reverse md:flex-row md:items-end">
-                <div className="flex flex-col gap-2.5 md:min-w-80 md:mt-10">
+                <div className="flex flex-col gap-2.5 md:min-w-80 md:mt-10 pointer-events-auto">
                   <span className="font-gilroy text-white text-[60px] font-[950] leading-17.5 md:text-[clamp(40px,4vw,60px)] md:leading-[clamp(3rem,4vw,4.375rem)]">
                     {product.name}<sup>®</sup>
                   </span>
@@ -79,12 +130,13 @@ export default function Featured() {
                     </Button>
                   </span>
                 </div>
-                <div className="rotate-[16.06deg] transition-all duration-300">
+                <div className="rotate-[16.06deg] transition-all duration-300 pointer-events-none">
                   <Image
                     src={product.image}
                     alt="featured image"
                     height={1089}
                     width={1131}
+                    draggable="false"
                   />
                 </div>
               </div>

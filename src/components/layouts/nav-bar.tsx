@@ -2,7 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import Typography from "../typography/typography";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import clsx from "clsx";
 
 const navLinks = [
   { href: "/", label: "Unsere Produkte" },
@@ -12,8 +13,32 @@ const navLinks = [
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <nav className="bg-primary">
+    <>
+      <div className="h-[60px] md:h-[100px] w-full bg-primary flex-shrink-0" />
+      <nav 
+        className={clsx(
+          "bg-primary fixed top-0 left-0 w-full z-50 transition-transform duration-300",
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        )}
+      >
       <div className="custom-container py-1.25 md:py-3.75 px-5 md:px-10 flex justify-between items-center">
         <Image
           src="/logo.svg"
@@ -89,6 +114,7 @@ export default function NavBar() {
           </div>
         </div>
       )}
-    </nav>
+      </nav>
+    </>
   );
 }
