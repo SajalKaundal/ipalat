@@ -32,7 +32,7 @@ export default function NavBar() {
 
   return (
     <>
-      <div className="h-[60px] md:h-[100px] w-full bg-primary flex-shrink-0" />
+      <div className="h-[60px] md:h-[100px] w-full bg-primary" />
       <nav 
         className={clsx(
           "bg-primary fixed top-0 left-0 w-full z-50 transition-transform duration-300",
